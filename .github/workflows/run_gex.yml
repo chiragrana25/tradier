@@ -20,11 +20,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
-      - name: Create Service Account Key File
-        run: echo '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' > service_account.json
-
+          
       - name: Run GEX Script
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }} # <--- ADD THIS LINE
         run: python gex_engine.py
